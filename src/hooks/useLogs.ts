@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import { api } from '@/utils/api';
 import { useSSE } from './useSSE';
 import { useDocumentVisibility } from './useDocumentVisibility';
-import type { LogEntry, LogType } from '../../shared/types';
+import type { LogEntry, LogType, LogContext, LogContextConfig, ContextInfoType } from '../../shared/types';
 
 interface UseLogsOptions {
   autoRefresh?: boolean;
@@ -13,6 +13,12 @@ interface UseLogsOptions {
 interface LogsResult {
   logs: LogEntry[];
   total: number;
+}
+
+interface ContextConfigResult {
+  config: LogContextConfig;
+  stats: { total: number; expired: number };
+  availableInfoTypes: ContextInfoType[];
 }
 
 export function useLogs(options: UseLogsOptions = {}) {
@@ -65,6 +71,54 @@ export function useLogs(options: UseLogsOptions = {}) {
     }
   }, []);
 
+  const fetchLogContext = useCallback(async (errorLogId: string): Promise<LogContext | null> => {
+    try {
+      const res = await api.get<LogContext>(`/logs/contexts/${errorLogId}`);
+      if (res.success && res.data) {
+        return res.data;
+      }
+      return null;
+    } catch {
+      return null;
+    }
+  }, []);
+
+  const fetchContextConfig = useCallback(async (): Promise<ContextConfigResult | null> => {
+    try {
+      const res = await api.get<ContextConfigResult>('/logs/contexts/config');
+      if (res.success && res.data) {
+        return res.data;
+      }
+      return null;
+    } catch {
+      return null;
+    }
+  }, []);
+
+  const updateContextConfig = useCallback(async (config: Partial<LogContextConfig>): Promise<LogContextConfig | null> => {
+    try {
+      const res = await api.put<LogContextConfig>('/logs/contexts/config', config);
+      if (res.success && res.data) {
+        return res.data;
+      }
+      return null;
+    } catch {
+      return null;
+    }
+  }, []);
+
+  const triggerContextCleanup = useCallback(async (): Promise<number> => {
+    try {
+      const res = await api.post<{ removed: number }>('/logs/contexts/cleanup');
+      if (res.success && res.data) {
+        return res.data.removed;
+      }
+      return 0;
+    } catch {
+      return 0;
+    }
+  }, []);
+
   useEffect(() => {
     fetchLogs();
   }, [fetchLogs]);
@@ -110,5 +164,9 @@ export function useLogs(options: UseLogsOptions = {}) {
     setPage,
     fetchLogs,
     fetchRecentLogs,
+    fetchLogContext,
+    fetchContextConfig,
+    updateContextConfig,
+    triggerContextCleanup,
   };
 }

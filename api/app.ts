@@ -1,6 +1,7 @@
 import express, {
   type Request,
   type Response,
+  type NextFunction,
 } from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
@@ -38,7 +39,10 @@ app.use(
   },
 )
 
-app.use((error: Error, req: Request, res: Response) => {
+app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
+  if (res.headersSent) {
+    return next(error)
+  }
   res.status(500).json({
     success: false,
     error: 'Server internal error',

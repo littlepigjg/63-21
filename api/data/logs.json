@@ -39,6 +39,56 @@
       "project": "",
       "environment": "",
       "detail": "新客户端注册: ?????"
+    },
+    {
+      "id": "3302755b-8165-4368-8750-62769c437406",
+      "timestamp": "2026-06-21T05:24:19.065Z",
+      "type": "change",
+      "clientIp": "",
+      "clientName": "admin",
+      "project": "proj_3eaec566",
+      "environment": "development",
+      "detail": "新增配置项: TEST_ERROR"
+    },
+    {
+      "id": "a4115691-5d3c-4800-aaaf-14c73974715a",
+      "timestamp": "2026-06-21T05:24:35.503Z",
+      "type": "change",
+      "clientIp": "",
+      "clientName": "admin",
+      "project": "proj_3eaec566",
+      "environment": "development",
+      "detail": "更新配置项: TEST_ERROR"
+    },
+    {
+      "id": "5e38c1af-af5e-45a7-aeba-454edcffab3e",
+      "timestamp": "2026-06-21T05:24:53.390Z",
+      "type": "error",
+      "clientIp": "::1",
+      "clientName": "anonymous",
+      "project": "????",
+      "environment": "development",
+      "detail": "配置项解密失败: TEST_ERROR"
+    },
+    {
+      "id": "1ee8b070-54b4-4938-a169-131795a18d42",
+      "timestamp": "2026-06-21T05:24:53.392Z",
+      "type": "pull",
+      "clientIp": "::1",
+      "clientName": "anonymous",
+      "project": "????",
+      "environment": "development",
+      "detail": "客户端 anonymous 拉取了 3 个配置项"
+    },
+    {
+      "id": "d59fbbd1-1067-4760-8c30-feeb3664660d",
+      "timestamp": "2026-06-21T05:25:54.902Z",
+      "type": "change",
+      "clientIp": "",
+      "clientName": "admin",
+      "project": "proj_3eaec566",
+      "environment": "development",
+      "detail": "删除配置项: TEST_ERROR"
     }
   ]
 }

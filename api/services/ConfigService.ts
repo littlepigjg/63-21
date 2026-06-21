@@ -108,6 +108,7 @@ export class ConfigService {
           configs[item.key] = await encryptionService.decrypt(item.value, item.iv, item.tag);
         } catch {
           configs[item.key] = '[DECRYPT_ERROR]';
+          await logService.addErrorLog(clientIp, clientName, project.name, envName, `配置项解密失败: ${item.key}`);
         }
       } else {
         configs[item.key] = item.value;

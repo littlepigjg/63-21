@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { configService } from '../services/ConfigService.js';
 import { clientService } from '../services/ClientService.js';
+import { logService } from '../services/LogService.js';
 
 const router = Router();
 
@@ -29,7 +30,8 @@ router.post('/', async (req, res) => {
       return;
     }
     res.json({ success: true, data: result });
-  } catch {
+  } catch (err) {
+    await logService.addErrorLog(req.ip || 'unknown', 'anonymous', String(req.body?.project || ''), String(req.body?.environment || ''), `客户端拉取配置异常: ${err instanceof Error ? err.message : '未知错误'}`);
     res.status(500).json({ success: false, error: 'Failed to pull configs' });
   }
 });
@@ -54,7 +56,8 @@ router.get('/:project/:env', async (req, res) => {
       return;
     }
     res.json({ success: true, data: result });
-  } catch {
+  } catch (err) {
+    await logService.addErrorLog(req.ip || 'unknown', 'anonymous', req.params.project, req.params.env, `客户端拉取配置异常: ${err instanceof Error ? err.message : '未知错误'}`);
     res.status(500).json({ success: false, error: 'Failed to pull configs' });
   }
 });

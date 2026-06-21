@@ -6,9 +6,11 @@ interface ModalProps {
   onClose: () => void;
   title: string;
   children: React.ReactNode;
+  maxWidth?: string;
+  scrollable?: boolean;
 }
 
-export default function Modal({ open, onClose, title, children }: ModalProps) {
+export default function Modal({ open, onClose, title, children, maxWidth = 'max-w-lg', scrollable = false }: ModalProps) {
   useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden';
@@ -25,14 +27,14 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative bg-[#1E293B] border border-[#334155] rounded-xl shadow-2xl w-full max-w-lg mx-4 animate-slide-in">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#334155]">
+      <div className={`relative bg-[#1E293B] border border-[#334155] rounded-xl shadow-2xl w-full ${maxWidth} mx-4 animate-slide-in max-h-[90vh] flex flex-col`}>
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#334155] shrink-0">
           <h3 className="text-lg font-semibold text-[#F1F5F9]">{title}</h3>
           <button onClick={onClose} className="text-[#64748B] hover:text-[#F1F5F9] transition-colors">
             <X className="w-5 h-5" />
           </button>
         </div>
-        <div className="px-6 py-4">{children}</div>
+        <div className={`px-6 py-4 ${scrollable ? 'overflow-y-auto flex-1' : ''}`}>{children}</div>
       </div>
     </div>
   );

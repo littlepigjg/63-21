@@ -1,0 +1,108 @@
+{
+  "config": {
+    "enabled": true,
+    "timeWindowBefore": 300000,
+    "timeWindowAfter": 300000,
+    "infoTypes": [
+      "relatedLogs",
+      "configSnapshot",
+      "clientState"
+    ],
+    "retentionDays": 7
+  },
+  "contexts": [
+    {
+      "id": "d6aae9b3-94c6-4948-902e-321d1ccba234",
+      "errorLogId": "5e38c1af-af5e-45a7-aeba-454edcffab3e",
+      "errorTimestamp": "2026-06-21T05:24:53.390Z",
+      "generatedAt": "2026-06-21T05:24:53.395Z",
+      "expiresAt": "2026-06-28T05:24:53.395Z",
+      "relatedLogs": [
+        {
+          "id": "3302755b-8165-4368-8750-62769c437406",
+          "timestamp": "2026-06-21T05:24:19.065Z",
+          "type": "change",
+          "clientIp": "",
+          "clientName": "admin",
+          "project": "proj_3eaec566",
+          "environment": "development",
+          "detail": "新增配置项: TEST_ERROR"
+        },
+        {
+          "id": "a4115691-5d3c-4800-aaaf-14c73974715a",
+          "timestamp": "2026-06-21T05:24:35.503Z",
+          "type": "change",
+          "clientIp": "",
+          "clientName": "admin",
+          "project": "proj_3eaec566",
+          "environment": "development",
+          "detail": "更新配置项: TEST_ERROR"
+        },
+        {
+          "id": "5e38c1af-af5e-45a7-aeba-454edcffab3e",
+          "timestamp": "2026-06-21T05:24:53.390Z",
+          "type": "error",
+          "clientIp": "::1",
+          "clientName": "anonymous",
+          "project": "????",
+          "environment": "development",
+          "detail": "配置项解密失败: TEST_ERROR"
+        }
+      ],
+      "configSnapshots": [
+        {
+          "projectId": "proj_3eaec566",
+          "projectName": "????",
+          "environment": "development",
+          "configItems": [
+            {
+              "key": "DB_HOST",
+              "value": "localhost",
+              "encrypted": false,
+              "updatedAt": "2026-06-17T03:43:09.216Z"
+            },
+            {
+              "key": "DB_PASSWORD",
+              "value": "[ENCRYPTED]",
+              "encrypted": true,
+              "updatedAt": "2026-06-17T03:43:20.257Z"
+            },
+            {
+              "key": "TEST_ERROR",
+              "value": "[ENCRYPTED]",
+              "encrypted": true,
+              "updatedAt": "2026-06-21T05:24:35.502Z"
+            }
+          ],
+          "capturedAt": "2026-06-21T05:24:53.394Z"
+        }
+      ],
+      "clientState": {
+        "clients": [
+          {
+            "id": "cli_7ba583ad",
+            "name": "?????",
+            "ip": "192.168.1.100",
+            "online": false,
+            "lastHeartbeat": "2026-06-17T03:44:17.330Z"
+          }
+        ],
+        "capturedAt": "2026-06-21T05:24:53.395Z"
+      },
+      "config": {
+        "enabled": true,
+        "timeWindowBefore": 300000,
+        "timeWindowAfter": 300000,
+        "infoTypes": [
+          "relatedLogs",
+          "configSnapshot",
+          "clientState"
+        ],
+        "retentionDays": 7
+      }
+    }
+  ],
+  "index": {
+    "5e38c1af-af5e-45a7-aeba-454edcffab3e": "d6aae9b3-94c6-4948-902e-321d1ccba234"
+  }
+}
